@@ -114,3 +114,8 @@ int Lcd7567::SetComDirection (bool reverse) {
    uint8_t buf[] { reverse  ? CMD_COM_DIRECTION_REVERSE : CMD_COM_DIRECTION_NORMAL };
    return spi.Write (buf, sizeof(buf));
 }
+
+int Lcd7567::WriteData (uint8_t * buf, size_t nBytes) {
+   std::cout << "WRITE DATA - NOT IMPLEMENTED " << std::endl;
+   return false;
+}

@@ -11,6 +11,8 @@ public:
    Lcd7567( std::string devPath);
    ~Lcd7567();
 
+   int WriteData (uint8_t * buf, size_t nBytes);
+
    int Reset();
    int SetAllPixel (bool on);
    int SetPageAddress (const uint8_t &addr);
