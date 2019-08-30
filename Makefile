@@ -6,7 +6,7 @@ TARGET      := lcd7567
 
 #The Directories, Source, Includes, Objects, Binary and Resources
 SRCDIR      := src
-INCDIR      := inc
+INCDIR      := include
 BUILDDIR    := obj
 TARGETDIR   := bin
 #RESDIR      := res
@@ -15,7 +15,7 @@ DEPEXT      := d
 OBJEXT      := o
 
 #Flags, Libraries and Includes
-CFLAGS      := -fopenmp -Wall -O3 -g -c++11
+CFLAGS      := -fopenmp -Wall -O3 -g -std=c++11
 LIB         := -fopenmp -lm -lpthread
 INC         := -I$(INCDIR) -I/usr/local/include
 INCDEP      := -I$(INCDIR)
