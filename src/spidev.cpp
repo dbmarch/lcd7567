@@ -14,9 +14,8 @@
 *  SpiWrite
 */ 
 SpiDev::SpiDev(std::string devPath)  :
-   mode{SPI_MODE_0},
+   mode{SPI_MODE_3},
    bits{8},
-   lsb{0},  // 0 = MSB first , 1 = lsb first
    speed{1000000}
     {
 
@@ -30,10 +29,6 @@ SpiDev::SpiDev(std::string devPath)  :
           perror("Error setting spi mode");
           }
 
-      else if (ioctl(fd, SPI_IOC_WR_LSB_FIRST, &lsb) < 0)
-          {
-          perror("Error setting LSB");
-          }
       else if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits)<0)   
           {
           perror("Error setting bits");
@@ -59,12 +54,12 @@ int  SpiDev::Write(uint8_t * buf, int nBytes) {
     
     xfer.tx_buf = txBuf;
     xfer.len = nBytes; 
-    xfer.cs_change = 0; /* Keep CS activated */
+    xfer.cs_change = 1; 
     xfer.delay_usecs = 0, //delay in us
     xfer.speed_hz = speed, //speed
     xfer.bits_per_word = bits, // bites per word 8
  
-    status = ioctl(fd, SPI_IOC_MESSAGE(0), xfer);
+    status = ioctl(fd, SPI_IOC_MESSAGE(1), xfer);
     if (status < 0)
         {
         perror("SPI_IOC_MESSAGE");
